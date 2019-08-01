@@ -87,7 +87,7 @@
 		</dependency>
 
 	</dependencies>
-	
+	<!--
 	<distributionManagement>
 	    <repository>
 	      <id>nexus</id>
@@ -100,6 +100,7 @@
 	      <url>http://ec2-172-31-37-209.us-east-2.compute.amazonaws.com:8081/repository/flipkart-snapshot/</url>
 	    </snapshotRepository>
 	</distributionManagement>
+         -->
 	
 	<build>
 		<finalName>maven-web-application</finalName>
