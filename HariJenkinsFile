@@ -1,0 +1,29 @@
+node('master')
+{
+def MavenHome = tool name: 'Maven3.6.1', type:'maven'
+
+
+stage('checkoutcode')
+{
+git branch: 'development', credentialsId: '8f473c85-5911-487b-8a91-6196b103303c', url: 'https://github.com/Muvvalagithub/maven-web-application-1.git'
+}
+
+stage('buildcode')
+{
+sh "${MavenHome}/bin/mvn clean package"
+}
+
+stage('UploadArtifact')
+{
+sh "${MavenHome}/bin/mvn deploy"
+}
+stage('DeployApplicationtotomcat'){
+sshagent(['0a45e807-dc35-4fa2-b6ff-88a3e77cd3d1']) 
+{
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.17.140.253:/opt/apache-tomcat-9.0.21/webapps/maven-web-application.war"
+
+}    
+}
+
+
+}
